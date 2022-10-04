@@ -3,9 +3,12 @@
   "version": "1.0.0",
   "description": "This application will be used to maximize the production of industrial production companies",
   "main": "src/index.js",
-  "repository": "https://github.com/JvFern4ndes/ProductionProject",
+  "repository": "https://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@github.com/Jvfern4ndes/productionproject.git",
   "author": "João Victor <jvfernandes.contato@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "dev": "npx nodemon src/index.js"
+  },
   "devDependencies": {
     "nodemon": "^2.0.20"
   },

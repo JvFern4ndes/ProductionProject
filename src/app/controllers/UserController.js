@@ -1,6 +1,6 @@
-class ContactController {
+class UserController {
   index(request, response) {
-    response.send('Send from Contact Controller');
+    response.send('Send from User Controller');
   }
 
   show() {
@@ -20,4 +20,4 @@ class ContactController {
   }
 }
 
-module.exports = new ContactController();
+module.exports = new UserController();

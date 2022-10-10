@@ -4,6 +4,6 @@ const UserController = require('./app/controllers/UserController');
 
 const router = Router();
 
-router.get('/contacts', UserController.index);
+router.get('/users', UserController.index);
 
 module.exports = router;

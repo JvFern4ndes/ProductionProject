@@ -1,6 +1,10 @@
+const UsersRepository = require('../repositories/UsersRepository');
+
 class UserController {
-  index(request, response) {
-    response.send('Send from User Controller');
+  async index(request, response) {
+    const users = await UsersRepository.findAll();
+
+    response.json(users);
   }
 
   show() {

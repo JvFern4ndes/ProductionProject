@@ -7,8 +7,16 @@ class UserController {
     response.json(users);
   }
 
-  show() {
-    // Obter um registro
+  async show(request, response) {
+    const { id } = request.params;
+
+    const user = await UsersRepository.findById(id);
+
+    if (!user) {
+      return response.status(404).json({ error: 'User not found' });
+    }
+
+    response.json(user);
   }
 
   store() {
@@ -19,8 +27,17 @@ class UserController {
     // Editar um registro
   }
 
-  delete() {
-    // Deletar um registro
+  async delete(request, response) {
+    const { id } = request.params;
+
+    const user = await UsersRepository.findById(id);
+
+    if (!user) {
+      return response.status(404).json({ error: 'User not found' });
+    }
+
+    await UsersRepository.delete(id);
+    response.sendStatus(204);
   }
 }
 

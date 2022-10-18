@@ -19,8 +19,26 @@ class UserController {
     response.json(user);
   }
 
-  store() {
-    // Criar novo registro
+  async store(request, response) {
+    const {
+      name, email, phone, category_id,
+    } = request.body;
+
+    if (!name) {
+      return response.status(400).json({ error: 'Name is required' });
+    }
+
+    const userExists = await UsersRepository.findByEmail(email);
+
+    if (userExists) {
+      return response.status(400).json({ error: 'This email is already in use' });
+    }
+
+    const user = await UsersRepository.create({
+      name, email, phone, category_id,
+    });
+
+    response.json(user);
   }
 
   update() {

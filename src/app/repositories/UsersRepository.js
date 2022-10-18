@@ -30,10 +30,32 @@ class UsersRepository {
     ));
   }
 
+  findByEmail(email) {
+    return new Promise((resolve) => resolve(
+      users.find((user) => user.email === email),
+    ));
+  }
+
   delete(id) {
     return new Promise((resolve) => {
       users = users.filter((user) => user.id !== id);
       resolve();
+    });
+  }
+
+  create({
+    name, email, phone, category_id,
+  }) {
+    return new Promise((resolve) => {
+      const newUser = {
+        id: v4(),
+        name,
+        email,
+        phone,
+        category_id,
+      };
+      users.push(newUser);
+      resolve(newUser);
     });
   }
 }

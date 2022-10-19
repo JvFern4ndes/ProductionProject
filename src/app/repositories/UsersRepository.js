@@ -58,6 +58,26 @@ class UsersRepository {
       resolve(newUser);
     });
   }
+
+  update(id, {
+    name, email, phone, category_id,
+  }) {
+    return new Promise((resolve) => {
+      const updatedUser = {
+        id,
+        name,
+        email,
+        phone,
+        category_id,
+      };
+
+      users = users.map((user) => (
+        user.id === id ? updatedUser : user
+      ));
+
+      resolve(updatedUser);
+    });
+  }
 }
 
 module.exports = new UsersRepository();

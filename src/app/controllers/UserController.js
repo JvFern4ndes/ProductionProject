@@ -41,8 +41,31 @@ class UserController {
     response.json(user);
   }
 
-  update() {
-    // Editar um registro
+  async update(request, response) {
+    const { id } = request.params;
+    const {
+      name, email, phone, category_id,
+    } = request.body;
+
+    const userExists = await UsersRepository.findById(id);
+    if (!userExists) {
+      return response.status(404).json({ error: 'User not found' });
+    }
+
+    if (!name) {
+      return response.status(400).json({ error: 'Name is required' });
+    }
+
+    const userByEmail = await UsersRepository.findByEmail(email);
+    if (userByEmail && userByEmail.id !== id) {
+      return response.status(400).json({ error: 'This email is already in use' });
+    }
+
+    const user = await UsersRepository.update(id, {
+      name, email, phone, category_id,
+    });
+
+    response.json(user);
   }
 
   async delete(request, response) {

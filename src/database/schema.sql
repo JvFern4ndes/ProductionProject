@@ -20,5 +20,5 @@ CREATE TABLE IF NOT EXISTS users (
   function_id UUID,
   machine_id UUID,
   FOREIGN KEY(function_id) REFERENCES functions(id),
-  FOREIGN KEY(machine_id) REFERENCES machines(id)
+  FOREIGN KEY(machine_id) REFERENCES machines(id),
 );

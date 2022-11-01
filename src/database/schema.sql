@@ -18,7 +18,11 @@ CREATE TABLE IF NOT EXISTS users (
   email VARCHAR UNIQUE,
   phone VARCHAR,
   function_id UUID,
-  machine_id UUID,
-  FOREIGN KEY(function_id) REFERENCES functions(id),
-  FOREIGN KEY(machine_id) REFERENCES machines(id),
+  FOREIGN KEY (function_id) REFERENCES functions(id)
+);
+
+CREATE TABLE IF NOT EXISTS users_machines (
+  id UUID NOT NULL UNIQUE DEFAULT uuid_generate_v4(),
+  id_user UUID,
+  id_machine UUID
 );

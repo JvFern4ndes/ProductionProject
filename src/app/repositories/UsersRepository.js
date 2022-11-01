@@ -46,13 +46,13 @@ class UsersRepository {
   }
 
   async create({
-    name, email, phone, function_id, machine_id,
+    name, email, phone, function_id,
   }) {
     const [row] = await db.query(`
-      INSERT INTO users(name, email, phone, function_id, machine_id)
-      VALUES('$1, $2', $3, $4, $5)
+      INSERT INTO users(name, email, phone, function_id)
+      VALUES($1, $2, $3, $4)
       RETURNING *
-    `, [name, email, phone, function_id, machine_id]);
+    `, [name, email, phone, function_id]);
 
     return row;
   }

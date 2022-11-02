@@ -2,7 +2,7 @@ CREATE DATABASE productionproject;
 
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
-CREATE TABLE IF NOT EXISTS functions (
+CREATE TABLE IF NOT EXISTS positions (
   id UUID NOT NULL UNIQUE DEFAULT uuid_generate_v4(),
   name VARCHAR NOT NULL
 );
@@ -17,8 +17,8 @@ CREATE TABLE IF NOT EXISTS users (
   name VARCHAR NOT NULL,
   email VARCHAR UNIQUE,
   phone VARCHAR,
-  function_id UUID,
-  FOREIGN KEY (function_id) REFERENCES functions(id)
+  position_id UUID,
+  FOREIGN KEY (position_id) REFERENCES positions(id)
 );
 
 CREATE TABLE IF NOT EXISTS users_machines (

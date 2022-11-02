@@ -45,13 +45,6 @@ class UsersRepository {
     return row;
   }
 
-  delete(id) {
-    return new Promise((resolve) => {
-      users = users.filter((user) => user.id !== id);
-      resolve();
-    });
-  }
-
   async create({
     name, email, phone, function_id,
   }) {
@@ -64,23 +57,22 @@ class UsersRepository {
     return row;
   }
 
-  update(id, {
-    name, email, phone, category_id,
+  async update(id, {
+    name, email, phone, function_id,
   }) {
+    const [row] = await db.query(`
+      UPDATE users
+      SET name = $1, email = $2, phone = $3, function_id = $4
+      WHERE Id = $5
+      RETURNING *
+    `, [name, email, phone, function_id, id]);
+    return row;
+  }
+
+  delete(id) {
     return new Promise((resolve) => {
-      const updatedUser = {
-        id,
-        name,
-        email,
-        phone,
-        category_id,
-      };
-
-      users = users.map((user) => (
-        user.id === id ? updatedUser : user
-      ));
-
-      resolve(updatedUser);
+      users = users.filter((user) => user.id !== id);
+      resolve();
     });
   }
 }

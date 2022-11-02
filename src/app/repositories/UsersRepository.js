@@ -20,22 +20,25 @@ let users = [
 ];
 
 class UsersRepository {
-  findAll() {
-    return new Promise((resolve) => {
-      resolve(users);
-    });
+  async findAll() {
+    const rows = await db.query('SELECT * FROM users');
+    return rows;
   }
 
-  findById(id) {
-    return new Promise((resolve) => resolve(
-      users.find((user) => user.id === id),
-    ));
+  async findById(id) {
+    const [row] = await db.query(`
+      SELECT * FROM users
+      WHERE id = $1
+    `, [id]);
+    return row;
   }
 
-  findByEmail(email) {
-    return new Promise((resolve) => resolve(
-      users.find((user) => user.email === email),
-    ));
+  async findByEmail(email) {
+    const [row] = await db.query(`
+      SELECT * FROM users
+      WHERE email = $1
+    `, [email]);
+    return row;
   }
 
   delete(id) {

@@ -20,8 +20,12 @@ let users = [
 ];
 
 class UsersRepository {
-  async findAll() {
-    const rows = await db.query('SELECT * FROM users');
+  async findAll(orderBy = 'ASC') {
+    const direction = orderBy.toUpperCase() === 'DESC' ? 'DESC' : 'ASC';
+    const rows = await db.query(`
+      SELECT * FROM users
+      ORDER BY name ${direction}
+    `);
     return rows;
   }
 

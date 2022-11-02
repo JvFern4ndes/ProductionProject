@@ -2,7 +2,8 @@ const UsersRepository = require('../repositories/UsersRepository');
 
 class UserController {
   async index(request, response) {
-    const users = await UsersRepository.findAll();
+    const { orderBy } = request.query;
+    const users = await UsersRepository.findAll(orderBy);
 
     response.json(users);
   }

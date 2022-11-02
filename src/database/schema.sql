@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS machines (
   name VARCHAR NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS users (
+CREATE TABLE IF NOT EXISTS employees (
   id UUID NOT NULL UNIQUE DEFAULT uuid_generate_v4(),
   name VARCHAR NOT NULL,
   email VARCHAR UNIQUE,
@@ -21,8 +21,8 @@ CREATE TABLE IF NOT EXISTS users (
   FOREIGN KEY (position_id) REFERENCES positions(id)
 );
 
-CREATE TABLE IF NOT EXISTS users_machines (
+CREATE TABLE IF NOT EXISTS employees_machines (
   id UUID NOT NULL UNIQUE DEFAULT uuid_generate_v4(),
-  id_user UUID,
+  id_employee UUID,
   id_machine UUID
 );

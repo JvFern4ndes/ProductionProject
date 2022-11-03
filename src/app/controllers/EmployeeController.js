@@ -22,7 +22,7 @@ class EmployeeController {
 
   async store(request, response) {
     const {
-      name, email, phone, category_id,
+      name, email, phone, position_id,
     } = request.body;
 
     if (!name) {
@@ -36,7 +36,7 @@ class EmployeeController {
     }
 
     const employee = await EmployeesRepository.create({
-      name, email, phone, category_id,
+      name, email, phone, position_id,
     });
 
     response.json(employee);
@@ -45,7 +45,7 @@ class EmployeeController {
   async update(request, response) {
     const { id } = request.params;
     const {
-      name, email, phone, category_id,
+      name, email, phone, position_id,
     } = request.body;
 
     const employeeExists = await EmployeesRepository.findById(id);
@@ -63,7 +63,7 @@ class EmployeeController {
     }
 
     const employee = await EmployeesRepository.update(id, {
-      name, email, phone, category_id,
+      name, email, phone, position_id,
     });
 
     response.json(employee);

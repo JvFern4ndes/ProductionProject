@@ -4,16 +4,20 @@ class EmployeesRepository {
   async findAll(orderBy = 'ASC') {
     const direction = orderBy.toUpperCase() === 'DESC' ? 'DESC' : 'ASC';
     const rows = await db.query(`
-      SELECT * FROM employees
-      ORDER BY name ${direction}
+      SELECT employees.*, positions.name AS position_name
+      FROM employees
+      LEFT JOIN positions ON positions.id = employees.position_id
+      ORDER BY employees.name ${direction}
     `);
     return rows;
   }
 
   async findById(id) {
     const [row] = await db.query(`
-      SELECT * FROM employees
-      WHERE id = $1
+      SELECT employees.*, positions.name AS position_name
+      FROM employees
+      LEFT JOIN positions ON positions.id = employees.position_id
+      WHERE employees.id = $1
     `, [id]);
     return row;
   }
